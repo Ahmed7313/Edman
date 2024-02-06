@@ -1,19 +1,31 @@
 package com.daman.edman.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.daman.edman.R
 
+// Set of Material typography styles to start with
+val ArabotoFont = FontFamily(
+    Font(R.font.araboto_normal),
+    Font(R.font.araboto_medium, FontWeight.Medium),
+    Font(R.font.araboto_bold, FontWeight.Bold),
+    Font(R.font.araboto_light, FontWeight.Light),
+    Font(R.font.araboto_black, FontWeight.Black)
+)
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
+        fontFamily = ArabotoFont,
+        fontWeight = FontWeight.W400,
+        fontSize = 12.sp,
+        color = Color.Black,
         lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
+        letterSpacing = 0.5.sp,
     )
     /* Other default text styles to override
     titleLarge = TextStyle(
