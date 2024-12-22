@@ -15,7 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.IconButton
+import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,9 +27,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.daman.edman.R
-import com.daman.edman.components.AppSpacer
-import com.daman.edman.components.HeaderText
-import com.daman.edman.components.NormalText
+import com.daman.edman.screens.components.AppSpacer
+import com.daman.edman.screens.components.HeaderText
+import com.daman.edman.screens.components.NormalText
 import com.daman.edman.ui.theme.SkyColorBlue
 import com.daman.edman.ui.theme.lightGrayColor
 import com.trend.camelx.ui.theme.large

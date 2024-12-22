@@ -2,4 +2,9 @@
     <string name="app_name">Edman</string>
     <string name="welcome_to_edman">مرحباً بك في اضمن</string>
     <string name="and">و</string>
+    <string name="Continue">Continue</string>
+    <string name="home">Home</string>
+    <string name="my_orders">My Orders</string>
+    <string name="wallet">Wallet</string>
+    <string name="profle">Profile</string>
 </resources>

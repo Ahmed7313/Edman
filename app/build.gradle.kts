@@ -1,11 +1,10 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(libs.plugins.com.android.application)
-    alias(libs.plugins.org.jetbrains.kotlin.android)
-    id("kotlin-kapt")
-    id("kotlin-parcelize")
-    alias(libs.plugins.ksp)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -24,10 +23,6 @@ android {
             useSupportLibrary = true
         }
     }
-//    androidExtensions {
-//        experimental = true
-//    }
-
 
     buildTypes {
         release {
@@ -39,24 +34,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
-        kotlinOptions {
-            jvmTarget = "17"
-        }
-    }
-    java {
-        toolchain {
-            languageVersion.set(JavaLanguageVersion.of(17))
-        }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.8"
+        kotlinCompilerExtensionVersion = "1.5.1"
     }
     packaging {
         resources {
@@ -64,33 +52,36 @@ android {
         }
     }
 
-    namespace = "com.daman.edman"
-    applicationVariants.all {
-        addJavaSourceFoldersToModel(
-            File(buildDir, "generated/ksp/$name/kotlin")
-        )
-    }
-
 }
 
 dependencies {
 
-    // Core Libraries
-    implementation(libs.core.ktx)
-    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.compose.icons)
 
     // Jetpack Compose Libraries
-    implementation(libs.activity.compose)
-    implementation(platform(libs.compose.bom))
-    implementation(libs.ui)
-    implementation(libs.ui.graphics)
-    implementation(libs.ui.tooling.preview)
-    implementation(libs.material3)
-    implementation(libs.compose.navigation)
-    //implementation(libs.compose.liveData)
+//    implementation(libs.compose.ui)
+//    implementation(libs.compose.material)
+//    implementation(libs.compose.activity)
+//    implementation(libs.compose.icons)
+//    implementation(libs.compose.ui.tooling)
+//    implementation(libs.compose.foundation)
+    implementation(libs.androidx.navigation.compose.v276)
 
-    //icon
-    implementation(libs.androidx.compose.material.material.icons.extended)
 
     // Hilt & Dagger - Dependency Injection
     implementation(libs.dagger.core)
@@ -110,81 +101,38 @@ dependencies {
     implementation(libs.scalarsConverter)
     implementation(libs.moshiKotlin)
     implementation(libs.moshiConverter)
+    ksp(libs.moshi.kotlin.codegen)
+    implementation(libs.symbol.processing.api)
 
-    // Room - Local Database
-//    implementation(libs.room.runtime)
-//    ksp(libs.room.compiler)
-//    implementation(libs.room.ktx)
-
-    // Testing Libraries
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.espresso.core)
-
-    // Jetpack Compose Testing Libraries
-    androidTestImplementation(platform(libs.compose.bom))
-    androidTestImplementation(libs.ui.test.junit4)
-
-    // Debugging Libraries
-    debugImplementation(libs.ui.tooling)
-    debugImplementation(libs.ui.test.manifest)
-
-    // Coil for image loading
-    implementation(libs.coil)
-    implementation(libs.coil.compose)
-
-    //Lottie
-    implementation(libs.lottie.compose)
-
-    //Compose-Destinations
-    implementation(libs.io.github.raamcosta.compose.destinations.animations.core)
-    ksp(libs.io.github.raamcosta.compose.destinations.ksp)
-
-    //Glide
-    implementation(libs.glide)
-    ksp(libs.glide.compiler)
-    implementation(libs.glide.compose)
+    //Compose Navigation
+    implementation(libs.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
 
     //Timber for logging
     implementation(libs.timber)
 
-    //Kotlin Coroutines and Flow for Compose
-    implementation(libs.coroutines.core)
-    implementation(libs.coroutines.android)
+    //Lottie
+    implementation(libs.lottie.compose)
 
-    //Accompanists
-    implementation(libs.accompanist.drawablepainter)
-    implementation(libs.accompanist.flowlayout)
-    implementation(libs.accompanist.navigation.animation)
-    implementation(libs.accompanist.navigation.material)
-    implementation(libs.accompanist.pager)
-    implementation(libs.accompanist.pager.indicators)
-    implementation(libs.accompanist.permissions)
-    implementation(libs.accompanist.placeholder)
-    implementation(libs.accompanist.swiperefresh)
-    implementation(libs.accompanist.systemuicontroller)
-//    implementation(libs.toasty)
+    // Room dependencies
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 
-    //ExpoPlayer
-    implementation(libs.androidx.media3.exoplayer)
+    //QrCode zxing
+    implementation(libs.zxing.android.embedded)
+    implementation(libs.zxing.core)
 
-    //CameraX and image Crope
-    implementation(libs.androidxCameraCamera2)
-    implementation(libs.androidxCameraView)
-    implementation(libs.androidxCameraLifecycle)
-    implementation(libs.vanniktechImageCropper)
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+    //coil
+    implementation(libs.coil)
+    implementation(libs.coil.compose)
 
-    implementation("com.github.TheHasnatBD:SweetToast:1.0.2")
+    //Sweet Toast
+    implementation("com.github.TheHasnatBD:SweetToast:1.0.2") {
+        exclude(group = "com.android.support")
+    }
 
-    implementation("androidx.compose.material:material:1.1.0-beta01")
-
-    //constrains Layout
-    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
-
-    //paging 3
-    implementation(libs.paging.compose)
-    implementation(libs.paging.runtime)
-
-    implementation(libs.androidx.biometric)
+    //SMS Consent API
+    implementation ("com.google.android.gms:play-services-auth:17.0.0")
+    implementation ("com.google.android.gms:play-services-auth-api-phone:17.1.0")
 }
