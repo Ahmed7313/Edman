@@ -1,6 +1,7 @@
 package com.aramex.mypos.Data.remote
 
 
+import com.daman.edman.data.remote.DTO.ChangeUserInfo.CompleteUserResponse
 import com.daman.edman.data.remote.DTO.Login.LoginResponseDTO
 import com.daman.edman.data.remote.DTO.OTPResponse.CodeResponse
 import okhttp3.RequestBody
@@ -23,4 +24,9 @@ interface ApiServices {
     suspend fun checkCode(
         @Body body: RequestBody
     ): CodeResponse
+
+    @POST("user/completeInfo")
+    suspend fun completeUserData(
+        @Body body: RequestBody,
+    ): CompleteUserResponse
 }

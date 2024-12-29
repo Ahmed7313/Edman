@@ -52,7 +52,7 @@ class ConfirmCodeViewModel @Inject constructor(
                     Timber.tag(TAG).i("Error message set: ${response.data?.msg}")
                     _isLoadingProgressBar.emit(false)
                     if (response.data?.status == true) {
-                        preferences.putToken(response.data.data?.token.toString())
+                        preferences.putToken(response.data.data?.token?.accessToken.toString())
                         preferences.putSignedInState(true)
                         response.data.data?.user?.let { preferences.putUser(it) }
                         Timber.tag(TAG).d("token: %s", response.data.data?.token.toString())

@@ -42,10 +42,12 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.aramex.mypos.Presentation.Components.MainEditText
+import com.daman.edman.screens.Home.HomeViewModel.CompleteUserModel
 import com.daman.edman.screens.components.AppToolBar
 import com.daman.edman.ui.theme.SkyColor
 import com.daman.edman.ui.theme.borderColor
 import com.daman.edman.ui.theme.buttonColor
+import com.trend.thecontent.screens.components.LoadingView
 import com.trend.thecontent.screens.components.MainButton
 import kotlinx.coroutines.launch
 
@@ -167,7 +169,7 @@ fun HomeScreen(
                                     ),
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.Center
-                            ) {
+                            ) { 
                                 NormalText(text = "ضمان وصول", color = Color.White)
                                 AppSpacer(width = medium)
                                 Image(
@@ -289,6 +291,15 @@ fun BottomSheetView(
 
     ) {
 
+        LoadingView(viewModel.isLoadingProgressBar.collectAsState(false).value)
+
+        var email by remember { mutableStateOf("") }
+        var name by remember { mutableStateOf("") }
+        var idNumber by remember { mutableStateOf("") }
+        var phone by remember { mutableStateOf("") }
+
+        val user by remember { viewModel.user }
+
         Image(
             painter = painterResource(id = R.drawable.logo_1_1),
             contentDescription = null,
@@ -322,7 +333,7 @@ fun BottomSheetView(
             verticalAlignment = Alignment.CenterVertically
         ) {
             NormalText(
-                text = viewModel.user.phone, fontSize = 14,
+                text = user.phone, fontSize = 14,
                 modifier = Modifier.background(
                     color = borderColor, shape = RoundedCornerShape(
                         large
@@ -341,9 +352,11 @@ fun BottomSheetView(
         AppSpacer(width = spacing)
 
         MainEditText(
-            text = "Ahmed",
-            label = "الاسم",
-            onTextChange = {},
+            text = name,
+            label = if (user.name == null)  "الاسم" else user.name!!,
+            onTextChange = {
+                name = it
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(76.dp),
@@ -354,9 +367,11 @@ fun BottomSheetView(
         AppSpacer(height = large)
 
         MainEditText(
-            text = "ahmedrabie@gmail.com",
-            label = "البريد الالكتروني",
-            onTextChange = {},
+            text = email,
+            label = if (user.email == null)"البريد الالكتروني" else user.email!!,
+            onTextChange = {
+                email = it
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(76.dp),
@@ -367,9 +382,11 @@ fun BottomSheetView(
         AppSpacer(height = large)
 
         MainEditText(
-            text = "6546516546315615",
-            label = "رقم البطاقة",
-            onTextChange = {},
+            text = idNumber,
+            label = if (user.id == null) "رقم البطاقة" else user.id.toString(),
+            onTextChange = {
+                idNumber = it
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(76.dp),
@@ -380,7 +397,14 @@ fun BottomSheetView(
         AppSpacer(height = spacing)
 
         MainButton(text = "ابدأ طلبك") {
-
+            viewModel.completeUserData(
+                CompleteUserModel(
+                name = name,
+                email = email,
+                idNumber = idNumber,
+                device = "android"
+                )
+            )
         }
 
         AppSpacer(height = spacing)
