@@ -20,3 +20,6 @@ object HomeScreen
 @Serializable
 object SplashScreen
 
+@Serializable
+object RequestGuaranteeScreen
+

@@ -1,4 +1,4 @@
-package com.daman.edman.screens.Home
+package com.daman.edman.screens.MyOrders
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -9,9 +9,7 @@ import com.aramex.mypos.Common.showSuccessMsg
 import com.aramex.mypos.Data.remote.DataWrapper.Resource
 import com.aramex.mypos.Data.remote.DataWrapper.ResponseState
 import com.daman.edman.EdmanApp
-import com.daman.edman.data.remote.DTO.ChangeUserInfo.CompleteUserResponse
 import com.daman.edman.domain.UseCases.Home.CompleteUserUseCase
-import com.daman.edman.screens.Auth.Login.LoginViewModel.LoginModel
 import com.trend.thecontent.data.local.preference.SavePreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -24,7 +22,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class MyOrdersViewModel @Inject constructor(
     private val preferences: SavePreferences,
     private val completeUserUseCase: CompleteUserUseCase
 ) : ViewModel() {
@@ -49,10 +47,6 @@ class HomeViewModel @Inject constructor(
     val isLoadingProgressBar = _isLoadingProgressBar.asSharedFlow()
 
     private val TAG = "LoginViewModel"
-
-    init {
-        Timber.tag("Token").i(preferences.getToken())
-    }
 
     fun completeUserData(model: CompleteUserModel) {
         completeUserUseCase(createRequestBody(model)).onEach { response ->
