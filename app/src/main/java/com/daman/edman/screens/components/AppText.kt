@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -66,9 +67,10 @@ fun NormalText(
     fontSize: Int = 12,
     fontWeight: FontWeight = FontWeight.Normal,
     color: Color = grayColor,
-    textAlign: TextAlign = TextAlign.Start
+    textAlign: TextAlign = TextAlign.Start,
+    maxLines: Int = 1,
+    overflow: TextOverflow = TextOverflow.Ellipsis
 ) {
-
     Text(
         modifier = modifier,
         text = text,
@@ -81,6 +83,8 @@ fun NormalText(
             letterSpacing = 0.5.sp
         ),
         textAlign = textAlign,
+        maxLines = maxLines,
+        overflow = overflow
     )
 }
 

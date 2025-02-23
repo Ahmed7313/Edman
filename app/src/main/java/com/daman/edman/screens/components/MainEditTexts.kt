@@ -1,12 +1,14 @@
 package com.aramex.mypos.Presentation.Components
 
 import android.util.Log
+import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -49,8 +51,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.FragmentActivity
 import com.daman.edman.screens.components.AppSpacer
+import com.daman.edman.screens.components.HeaderText
 import com.daman.edman.ui.theme.ArabotoFont
 import com.daman.edman.ui.theme.borderColor
+import com.daman.edman.ui.theme.labelColor
 import com.trend.camelx.ui.theme.extraSmall
 import com.trend.camelx.ui.theme.large
 import com.trend.camelx.ui.theme.small
@@ -58,7 +62,7 @@ import kotlinx.coroutines.delay
 
 
 @Composable
-fun  MainEditText(
+fun MainEditText(
     modifier: Modifier = Modifier,
     text: String,
     label: String? = null,
@@ -66,7 +70,7 @@ fun  MainEditText(
     isError: Boolean,
     isPassword: Boolean = false,
     trailingIcon: @Composable (() -> Unit)? = null,
-    leadingIcon : @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
     keyboardType: KeyboardOptions = KeyboardOptions.Default,
     textAlign: Boolean = false,
     readOnly: Boolean = false,
@@ -249,6 +253,111 @@ fun MainEditTextWithoutIcon(
             textStyle = if (textAlign) LocalTextStyle.current.copy(textAlign = TextAlign.Center) else LocalTextStyle.current,
 
             )
+    }
+}
+
+@Composable
+fun MainEditTextFramed(
+    modifier: Modifier = Modifier,
+    text: String,
+    label: String? = null,
+    onTextChange: (String) -> Unit,
+    isError: Boolean,
+    isPassword: Boolean = false,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    keyboardType: KeyboardOptions = KeyboardOptions.Default,
+    textAlign: Boolean = false,
+    readOnly: Boolean = false,
+    aboveText: String,
+    shape: RoundedCornerShape = RoundedCornerShape(8.dp),
+    enabled: Boolean = true,
+    imeAction: ImeAction = ImeAction.Done, // New argument to specify IME action
+    onImeAction: (() -> Unit)? = null,  // Optional callback for custom action on IME action
+    focusRequester: FocusRequester = remember { FocusRequester() } // New focus requester
+) {
+
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val interactionSource = remember { MutableInteractionSource() }
+    val isFocused = interactionSource.collectIsFocusedAsState().value
+    var passwordVisible by rememberSaveable { mutableStateOf(false) } // State to toggle password visibility
+    val visualTransformation =
+        if (!passwordVisible && isPassword) PasswordVisualTransformation()
+        else VisualTransformation.None
+
+    val focusManager = LocalFocusManager.current
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .border(width = 1.dp, color = borderColor, shape = shape)
+    ) {
+        HeaderText(
+            text = aboveText,
+            color = Color(0xFF898FA4),
+            modifier = Modifier.padding(start = 16.dp, top = 8.dp),
+            fontSize = 12
+        )
+
+        AppSpacer(height = 8.dp)
+
+        OutlinedTextField(
+            value = text,
+            onValueChange = onTextChange,
+            enabled = enabled,
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp)
+                .focusRequester(focusRequester), // Add focusRequester to control focus
+            interactionSource = interactionSource,
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color.Transparent,
+                unfocusedBorderColor = Color.Transparent,
+                focusedTextColor = Color.Black,
+                unfocusedTextColor = Color.Black,
+                unfocusedLabelColor = borderColor,
+                focusedLabelColor = Color.Transparent
+            ),
+            trailingIcon = {
+                if (isPassword) {
+                    val image =
+                        if (passwordVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
+                    val description = if (passwordVisible) "Hide password" else "Show password"
+
+                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                        Icon(imageVector = image, contentDescription = description)
+                    }
+                } else {
+                    trailingIcon?.invoke()
+                }
+            },
+            isError = isError,
+            readOnly = readOnly,
+            label = {
+                AutoSizeText(
+                    text = label ?: "",
+                    color = labelColor ,
+                    fontFamily = ArabotoFont,
+                    fontSize = 12.sp
+                )
+            },
+            keyboardOptions = keyboardType.copy(
+                keyboardType = if (isPassword) KeyboardType.Password else keyboardType.keyboardType,
+                imeAction = imeAction // Set the IME action
+            ),
+            visualTransformation = visualTransformation,
+            keyboardActions = KeyboardActions(
+                onNext = {
+                    onImeAction?.invoke() // Call custom callback for next action
+                    focusManager.moveFocus(FocusDirection.Next) // Move to next field
+                },
+                onDone = {
+                    onImeAction?.invoke() // Call custom callback for done action
+                    keyboardController?.hide()
+                }
+            ),
+            textStyle = if (textAlign) LocalTextStyle.current.copy(textAlign = TextAlign.Center) else LocalTextStyle.current,
+        )
+
     }
 }
 

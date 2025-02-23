@@ -1,0 +1,41 @@
+package com.daman.edman.screens.components
+
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.daman.edman.R
+
+
+@Composable
+fun IconTextView(
+    modifier: Modifier = Modifier,
+    text: String,
+    icon: Int
+) {
+
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically) {
+
+        Icon(
+            painter = painterResource(id = icon),
+            contentDescription = null,
+            modifier = Modifier.size(24.dp)
+        )
+
+        AppSpacer(width = 8.dp)
+        HeaderText(text = text, fontSize = 14)
+    }
+}
+
+@Preview
+@Composable
+fun IconTextViewPreview() {
+    IconTextView(text = "Icon Text View", icon = R.drawable.ic_check)
+}

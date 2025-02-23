@@ -34,7 +34,9 @@ import com.daman.edman.R
 import com.daman.edman.screens.components.AppSpacer
 import com.daman.edman.screens.components.CheckedItem
 import com.daman.edman.screens.components.HeaderText
+import com.daman.edman.screens.components.IconTextView
 import com.daman.edman.screens.components.NormalText
+import com.daman.edman.screens.components.UserInfoItem
 import com.daman.edman.ui.theme.SkyColor
 import com.daman.edman.ui.theme.borderColor
 import com.daman.edman.ui.theme.buttonColor
@@ -42,8 +44,9 @@ import com.daman.edman.ui.theme.grayColor
 import com.trend.camelx.ui.theme.large
 import com.trend.camelx.ui.theme.medium
 import com.trend.camelx.ui.theme.spacing
+import com.trend.thecontent.screens.components.MainButton
 
-@Preview(showBackground = true )
+@Preview(showBackground = true)
 @Composable
 fun RequestGuaranteeScreen() {
     Column(
@@ -84,36 +87,12 @@ fun RequestGuaranteeScreen() {
 
         AppSpacer(height = large)
 
-        Surface(
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(large),
-            border = BorderStroke(width = 1.dp, color = grayColor)
-        ) {
-
-            Column(modifier = Modifier.padding(spacing)) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    CheckedItem(
-                        text = "الاسم الكامل"
-                    )
-                    AppSpacer(width = medium)
-                    CheckedItem(
-                        text = "رقم الهاتف"
-                    )
-                }
-                AppSpacer(height = large)
-
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    CheckedItem(
-                        text = "الاسم الكامل"
-                    )
-                    AppSpacer(width = medium)
-                    CheckedItem(
-                        text = "رقم الهاتف"
-                    )
-                }
-            }
-
-        }
+        UserInfoItem(
+            name = "محمد عبد الرحمن",
+            phone = "01000000000",
+            email = "ahmedraboe@gmail.com",
+            id = "123456789012345"
+        )
 
 
         AppSpacer(height = spacing)
@@ -124,6 +103,24 @@ fun RequestGuaranteeScreen() {
         AppSpacer(height = large)
 
         GuaranteeSelectionScreen()
+
+        AppSpacer(height = spacing)
+
+
+        MainButton(
+            text = "المتابعة"
+        ) {
+
+        }
+
+        AppSpacer(height = spacing)
+
+        HeaderText(
+            text = "إلغاء",
+            fontSize = 16,
+            color = buttonColor,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
     }
 }
 
@@ -232,6 +229,34 @@ fun PaymentGuaranteeContent() {
             }
         )
 
+        AppSpacer(height = medium)
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconTextView(
+                text = "بيانات البائع",
+                icon = R.drawable.ic_truck
+            )
+
+            Icon(
+                painter = painterResource(id = R.drawable.ic_mark),
+                contentDescription = null,
+                modifier = Modifier.size(24.dp)
+            )
+        }
+
+        AppSpacer(height = medium)
+
+        UserInfoItem(
+            name = "محمد عبد الرحمن",
+            phone = "01000000000",
+            email = "asda@gmail.com",
+            id = "123456789012345"
+        )
+
     }
 
 }
@@ -259,5 +284,34 @@ fun ReceiptGuaranteeContent() {
             }
         )
 
+        AppSpacer(height = medium)
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconTextView(
+                text = "بيانات البائع",
+                icon = R.drawable.ic_truck
+            )
+
+            Icon(
+                painter = painterResource(id = R.drawable.ic_mark),
+                contentDescription = null,
+                modifier = Modifier.size(24.dp)
+            )
+        }
+
+        AppSpacer(height = medium)
+
+        UserInfoItem(
+            name = "محمد عبد الرحمن",
+            phone = "01000000000",
+            email = "asda@gmail.com",
+            id = "123456789012345"
+        )
+
     }
+
 }

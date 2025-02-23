@@ -28,6 +28,9 @@ val LightSkyColor = Color(0x6639DDFF)
 val LighterSkyColor = Color(0x1A39DDFF)
 val ContentBorderColor = Color(0xFFFAFBFB)
 
+val labelColor = Color(0xFFCCCCCC)
+val lightBlue = Color(0xFFDCE6F0)
+
 val buttonColor = Color(0xFF18569A)
 val borderColor = Color(0xFFEEF2FE)
 val Purble = Color(0xFF7059FF)
