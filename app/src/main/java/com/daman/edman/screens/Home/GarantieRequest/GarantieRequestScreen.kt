@@ -1,8 +1,13 @@
 package com.daman.edman.screens.Home.GarantieRequest
 
+import ImagePicker
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Checkbox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
@@ -16,14 +21,15 @@ import com.daman.edman.screens.components.HeaderText
 import com.daman.edman.screens.components.IconTextView
 import com.trend.camelx.ui.theme.large
 import com.trend.camelx.ui.theme.spacing
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
+import com.daman.edman.screens.components.AppSpacerHeight
+import com.daman.edman.screens.components.DatePickerView
 import com.daman.edman.screens.components.NormalText
 import com.daman.edman.screens.components.SegmentedPills
+import com.daman.edman.ui.theme.buttonColor
+import com.trend.thecontent.screens.components.MainButton
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
@@ -33,6 +39,7 @@ fun GarantieRequestScreen() {
         modifier = Modifier
             .fillMaxSize()
             .padding(start = spacing, end = spacing, top = large, bottom = large)
+            .verticalScroll(rememberScrollState())
 
     ) {
 
@@ -122,6 +129,128 @@ fun GarantieRequestScreen() {
                 // Handle the selected value, e.g., update ViewModel or state
                 println("Selected value: $selectedValue")
             }
+        )
+
+        AppSpacer(height = large)
+
+        NormalText(text = "أو", modifier = Modifier.align(Alignment.CenterHorizontally))
+
+        AppSpacer(height = large)
+
+        DatePickerView {
+
+        }
+
+        AppSpacerHeight()
+
+        IconTextView(
+            text = "مشاركة روابط",
+            icon = R.drawable.ic_link_sharing
+        )
+
+        AppSpacerHeight()
+
+        var productLink by remember { mutableStateOf("") }
+        var productLinkError by remember { mutableStateOf(false) }
+
+        MainEditTextFramed(
+            text = productLink,
+            onTextChange = {
+                productLink = it
+                productLinkError = false
+            },
+            isError = productLinkError,
+            label = "يمكنك مشاركة رابط طلب منتجك هنا",
+            aboveText = " رابط طلب منتجك",
+        )
+
+        AppSpacerHeight()
+
+        var pageLink by remember { mutableStateOf("") }
+        var pageLinkError by remember { mutableStateOf(false) }
+
+        MainEditTextFramed(
+            text = pageLink,
+            onTextChange = {
+                pageLink = it
+                pageLinkError = false
+            },
+            isError = pageLinkError,
+            label = " رابط  الصفحة الرسمية",
+            aboveText = "يمكنك مشاركة رابط الصفحة الرسمية للبائع هنا",
+        )
+
+        AppSpacerHeight()
+
+        IconTextView(
+            text = "مشاركة صور الطلب",
+            icon = R.drawable.ic_camera
+        )
+
+        AppSpacerHeight()
+
+        ImagePicker(
+            icon = R.drawable.ic_product_image,
+            text = "صورة للمنتج",
+            secText = "قم تحميل صورة منتجك هنا"
+        ) { }
+
+        AppSpacerHeight()
+
+        ImagePicker(
+            icon = R.drawable.ic_product_order,
+            text = "صورة لطلب المنتج ",
+            secText = "قم تحميل صورة لطلب المنتج هنا"
+        ) { }
+
+        AppSpacerHeight()
+
+        var isChecked = remember { mutableStateOf(false) }
+
+        Row(
+            modifier = Modifier.padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Checkbox that updates the state when clicked
+            Checkbox(
+                checked = isChecked.value,
+                onCheckedChange = {
+                    isChecked.value = it
+                }
+            )
+
+            // Text next to the checkbox
+            HeaderText(
+                text = "باختيار هذه الخاصية سوف يتم تأكيد شحن الطلب و تم استلامه من قبل المشتري و هذا ضمان لعميلة الدفع.",
+                modifier = Modifier.padding(start = 8.dp),
+                color = Color.Gray,
+                fontSize = 14
+            )
+        }
+
+        AppSpacerHeight()
+
+        ImagePicker(
+            icon = R.drawable.ic_blue_check,
+            text = "التأكيد بصورة لبوليصة الشحن ",
+            secText = "يرجى تأكيد الشحن وإرسال الطلب للمشتري  بصورة بوليصة الشحن."
+        ) { }
+
+        AppSpacerHeight()
+
+        MainButton(
+            text = "المتابعة"
+        ) {
+
+        }
+
+        AppSpacer(height = spacing)
+
+        HeaderText(
+            text = "إلغاء",
+            fontSize = 16,
+            color = buttonColor,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         )
     }
 }

@@ -68,8 +68,8 @@ fun NormalText(
     fontWeight: FontWeight = FontWeight.Normal,
     color: Color = grayColor,
     textAlign: TextAlign = TextAlign.Start,
-    maxLines: Int = 1,
-    overflow: TextOverflow = TextOverflow.Ellipsis
+    maxLines: Int = Int.MAX_VALUE,
+    overflow: TextOverflow = TextOverflow.Visible
 ) {
     Text(
         modifier = modifier,

@@ -30,3 +30,20 @@ fun AppSpacer(
         .border(width = borderWidth.dp, color = borderColor)
     )
 }
+
+
+@Composable
+fun AppSpacerHeight(
+    modifier: Modifier = Modifier,
+    width: Dp = 0.dp,
+    height : Dp = 16.dp,
+    color: Color = Color.Transparent,
+    shape: Shape = RoundedCornerShape(0),
+    borderWidth : Int = 0,
+    borderColor: Color = Color.Transparent
+){
+    Spacer(modifier = modifier.height(height).width(width)
+        .background(color = color, shape = shape)
+        .border(width = borderWidth.dp, color = borderColor)
+    )
+}

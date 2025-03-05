@@ -269,7 +269,7 @@ fun MainEditTextFramed(
     textAlign: Boolean = false,
     readOnly: Boolean = false,
     aboveText: String,
-    shape: RoundedCornerShape = RoundedCornerShape(8.dp),
+    shape: RoundedCornerShape = RoundedCornerShape(16.dp),
     enabled: Boolean = true,
     imeAction: ImeAction = ImeAction.Done, // New argument to specify IME action
     onImeAction: (() -> Unit)? = null,  // Optional callback for custom action on IME action
@@ -289,7 +289,7 @@ fun MainEditTextFramed(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .border(width = 1.dp, color = borderColor, shape = shape)
+            .border(width = 1.dp, color = Color.Gray, shape = shape)
     ) {
         HeaderText(
             text = aboveText,
