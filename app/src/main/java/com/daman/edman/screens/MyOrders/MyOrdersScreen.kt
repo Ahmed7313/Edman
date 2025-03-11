@@ -16,7 +16,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -39,8 +41,10 @@ import com.daman.edman.R
 import com.daman.edman.screens.components.AppSpacer
 import com.daman.edman.screens.components.CheckedItem
 import com.daman.edman.screens.components.HeaderText
+import com.daman.edman.screens.components.IconTextView
 import com.daman.edman.screens.components.NormalText
 import com.daman.edman.ui.theme.SkyColor
+import com.daman.edman.ui.theme.SkyColorBlue
 import com.daman.edman.ui.theme.borderColor
 import com.daman.edman.ui.theme.buttonColor
 import com.daman.edman.ui.theme.grayColor
@@ -53,4 +57,94 @@ import com.trend.thecontent.screens.components.LoadingView
 @Composable
 fun MyOrdersScreen(modifier: Modifier = Modifier) {
 
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(start = spacing, end = spacing, top = large, bottom = large)
+
+    ) {
+        item {
+            Row(modifier = Modifier.fillMaxWidth().padding(top = spacing),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically) {
+
+                HeaderText(text = "الطلبات", fontSize = 16)
+
+                IconTextView(
+                    icon = R.drawable.ic_filter,
+                    text = "تصفية الطلبات",
+                    textColor = SkyColorBlue,
+                    tint = SkyColorBlue
+                )
+            }
+
+            AppSpacer(height = spacing)
+
+            HorizontalDivider()
+
+            AppSpacer(height = large)
+
+            var searchQuery by remember { mutableStateOf("") }
+            MainEditText(
+                text = searchQuery,
+                onTextChange = { searchQuery = it },
+                label = "البحث...",
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(spacing),
+                isError = false,
+                leadingIcon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_search),
+                        contentDescription = null,
+                        modifier = Modifier.size(17.dp)
+                    )
+                }
+            )
+
+            AppSpacer(height = large)
+
+
+            HeaderText(text = "قيد التنفيذ ( 1 )", color = grayColor, fontSize = 16)
+
+            AppSpacer(height = large)
+
+            OrderItem(
+                statues = "progress",
+                orderedIn = "تم الطلب في Jan 16,2024",
+                deliveryDuration = "اليوم",
+                description = "طلبك برقم 0015584 لضمان وصول شحنتك ( Bed 30×140×200cm - Beige - GO.W.2-2B )",
+                total = "500",
+                onClick = {}
+            )
+
+            AppSpacer(height = large)
+
+
+            HeaderText(text = "مكتملة ", color = grayColor, fontSize = 16)
+
+            AppSpacer(height = large)
+
+            OrderItem(
+                statues = "delivered",
+                orderedIn = "تم الطلب في Jan 16,2024",
+                deliveryDuration = "اليوم",
+                description = "طلبك برقم 0015584 لضمان وصول شحنتك ( Bed 30×140×200cm - Beige - GO.W.2-2B )",
+                total = "500",
+                onClick = {}
+            )
+
+            AppSpacer(height = large)
+
+            OrderItem(
+                statues = "canceled",
+                orderedIn = "تم الطلب في Jan 16,2024",
+                deliveryDuration = "اليوم",
+                description = "طلبك برقم 0015584 لضمان وصول شحنتك ( Bed 30×140×200cm - Beige - GO.W.2-2B )",
+                total = "500",
+                onClick = {}
+            )
+
+        }
+
+    }
 }
