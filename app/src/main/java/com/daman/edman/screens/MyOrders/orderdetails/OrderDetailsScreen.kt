@@ -75,6 +75,7 @@ fun OrderDetailsScreen() {
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .padding(start = large, end = large, top = large, bottom = large)
+                .padding(start = spacing, end = spacing, top = large, bottom = large)
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_black_box),
@@ -169,6 +170,7 @@ fun OrderDetailsScreen() {
                     color = SkyColorBlue
                 )
             }
+        }
 
             AppSpacerHeight()
 
@@ -182,6 +184,7 @@ fun OrderDetailsScreen() {
                     color = SkyColorBlue
                 )
             }
+    }
 
             AppSpacerHeight()
 

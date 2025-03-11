@@ -189,7 +189,7 @@ fun MyOrdersScreen(modifier: Modifier = Modifier) {
                     sheetState = sheetState,
                     containerColor = Color.White,
                 ) {
-                    com.daman.edman.screens.MyOrders.orderdetails.BottomSheetView()
+                    BottomSheetView()
                 }
             }
         }
