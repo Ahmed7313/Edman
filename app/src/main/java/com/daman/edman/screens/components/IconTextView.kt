@@ -18,6 +18,7 @@ fun IconTextView(
     modifier: Modifier = Modifier,
     text: String,
     icon: Int,
+    textColor : Color = Color.Black,
     tint : Color = Color.Black
 ) {
 
@@ -33,7 +34,7 @@ fun IconTextView(
         )
 
         AppSpacer(width = 8.dp)
-        HeaderText(text = text, fontSize = 14)
+        HeaderText(text = text, fontSize = 14, color = textColor)
     }
 }
 
