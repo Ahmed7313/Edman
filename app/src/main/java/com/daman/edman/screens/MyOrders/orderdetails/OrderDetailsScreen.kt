@@ -172,155 +172,152 @@ fun OrderDetailsScreen() {
             }
         }
 
-            AppSpacerHeight()
+        AppSpacerHeight()
 
-            NormalText(text = " رابط  الصفحة الرسمية")
+        NormalText(text = " رابط  الصفحة الرسمية")
 
-            AppSpacerHeight()
+        AppSpacerHeight()
 
-            BorderView(shape = RoundedCornerShape(spacing)) {
-                NormalText(
-                    text = "//homzmart.com/en/p/red-beech-wood-l-shape-s...",
-                    color = SkyColorBlue
-                )
-            }
+        BorderView(shape = RoundedCornerShape(spacing)) {
+            NormalText(
+                text = "//homzmart.com/en/p/red-beech-wood-l-shape-s...",
+                color = SkyColorBlue
+            )
+        }
     }
 
-            AppSpacerHeight()
+    AppSpacerHeight()
 
-            IconTextView(
-                icon = R.drawable.ic_black_check,
-                text = "صورة لبوليصة الشحن ",
+    IconTextView(
+        icon = R.drawable.ic_black_check,
+        text = "صورة لبوليصة الشحن ",
+    )
+
+    AppSpacerHeight()
+
+    BorderView {
+        Row(modifier = Modifier.fillMaxWidth()) {
+
+            Icon(
+                painter = painterResource(R.drawable.ic_pdf),
+                contentDescription = null,
+                modifier = Modifier.size(24.dp),
+                tint = RedColor
             )
 
-            AppSpacerHeight()
-
-            BorderView {
-                Row(modifier = Modifier.fillMaxWidth()) {
-
-                    Icon(
-                        painter = painterResource(R.drawable.ic_pdf),
-                        contentDescription = null,
-                        modifier = Modifier.size(24.dp),
-                        tint = RedColor
-                    )
-
-                    AppSpacer(width = large)
-                    Column {
-                        HeaderText(
-                            text = "Bed 30×140×200cm - Beige .pdf",
-                            color = grayColor,
-                            fontSize = 14
-                        )
-                        AppSpacer(height = small)
-                        NormalText(text = "1 MB")
-                    }
-
-                }
-            }
-
-
-            AppSpacerHeight()
-
-            IconTextView(
-                icon = R.drawable.ic_payment_card,
-                text = "ملخص الدفع",
-            )
-
-            AppSpacerHeight()
-
-            BorderView {
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-
-                    NormalText(text = "مبلغ  طلبك من البائع", fontSize = 14)
-
-                    Row {
-                        NormalText(text = "500")
-                        AppSpacer(width = medium)
-                        NormalText(text = "EGP", fontSize = 10)
-                    }
-                }
-
-                AppSpacerHeight()
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-
-                    NormalText(text = "سعر الخدمة (20%)", fontSize = 14)
-
-                    Row {
-                        NormalText(text = "100")
-                        AppSpacer(width = medium)
-                        NormalText(text = "EGP", fontSize = 10)
-                    }
-                }
-
-                AppSpacerHeight()
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-
-                    NormalText(text = "طريقة الدفع", fontSize = 14)
-
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        NormalText(text = " بطاقة xxx2014")
-                        AppSpacer(width = medium)
-                        Icon(
-                            painter = painterResource(R.drawable.ic_visa),
-                            contentDescription = null,
-                            modifier = Modifier.size(24.dp),
-                            tint = visaColor
-                        )
-                    }
-                }
-
-                AppSpacerHeight()
-
-                HorizontalDivider()
-
-                AppSpacerHeight()
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-
-                    HeaderText(text = "الإجمالي", fontSize = 14)
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        HeaderText(text = "600", fontSize = 14)
-                        AppSpacer(width = medium)
-                        NormalText(text = "EGP", fontSize = 10)
-                    }
-                }
+            AppSpacer(width = large)
+            Column {
+                HeaderText(
+                    text = "Bed 30×140×200cm - Beige .pdf",
+                    color = grayColor,
+                    fontSize = 14
+                )
+                AppSpacer(height = small)
+                NormalText(text = "1 MB")
             }
 
         }
+    }
 
-        if (showBottomSheet) {
-            ModalBottomSheet(
-                onDismissRequest = { showBottomSheet = false },
-                sheetState = sheetState,
-                containerColor = Color.White,
-            ) {
-                BottomSheetView()
+
+    AppSpacerHeight()
+
+    IconTextView(
+        icon = R.drawable.ic_payment_card,
+        text = "ملخص الدفع",
+    )
+
+    AppSpacerHeight()
+
+    BorderView {
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            NormalText(text = "مبلغ  طلبك من البائع", fontSize = 14)
+
+            Row {
+                NormalText(text = "500")
+                AppSpacer(width = medium)
+                NormalText(text = "EGP", fontSize = 10)
             }
         }
 
+        AppSpacerHeight()
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            NormalText(text = "سعر الخدمة (20%)", fontSize = 14)
+
+            Row {
+                NormalText(text = "100")
+                AppSpacer(width = medium)
+                NormalText(text = "EGP", fontSize = 10)
+            }
+        }
+
+        AppSpacerHeight()
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            NormalText(text = "طريقة الدفع", fontSize = 14)
+
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                NormalText(text = " بطاقة xxx2014")
+                AppSpacer(width = medium)
+                Icon(
+                    painter = painterResource(R.drawable.ic_visa),
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp),
+                    tint = visaColor
+                )
+            }
+        }
+
+        AppSpacerHeight()
+
+        HorizontalDivider()
+
+        AppSpacerHeight()
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            HeaderText(text = "الإجمالي", fontSize = 14)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                HeaderText(text = "600", fontSize = 14)
+                AppSpacer(width = medium)
+                NormalText(text = "EGP", fontSize = 10)
+            }
+        }
+    }
+
+    if (showBottomSheet) {
+        ModalBottomSheet(
+            onDismissRequest = { showBottomSheet = false },
+            sheetState = sheetState,
+            containerColor = Color.White,
+        ) {
+            BottomSheetView()
+        }
     }
 
 }
+
 
 @Preview
 @Composable
