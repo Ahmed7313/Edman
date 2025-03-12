@@ -266,7 +266,7 @@ fun MainEditTextFramed(
     text: String,
     label: String? = null,
     onTextChange: (String) -> Unit,
-    isError: Boolean,
+    isError: Boolean = false,
     isPassword: Boolean = false,
     trailingIcon: @Composable (() -> Unit)? = null,
     keyboardType: KeyboardOptions = KeyboardOptions.Default,

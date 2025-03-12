@@ -17,6 +17,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -28,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
+import com.aramex.mypos.Presentation.Components.MainEditTextFramed
 import com.daman.edman.R
 import com.daman.edman.screens.components.AppSpacerHeight
 import com.daman.edman.screens.components.HeaderText
@@ -96,6 +101,53 @@ fun UserProfileScreen() {
                         .background(shape = CircleShape, color = SkyColorBlue)
                 )
             }
+
+            AppSpacerHeight()
+
+            var name by remember { mutableStateOf("") }
+            MainEditTextFramed(
+                text = name,
+                onTextChange = { name = it },
+                label = "ahmed adel",
+                aboveText = "الاسم",
+            )
+
+            AppSpacerHeight()
+
+            var email by remember { mutableStateOf("") }
+            MainEditTextFramed(
+                text = email,
+                onTextChange = { email = it },
+                label = "ahmedrabie@gmail.com",
+                aboveText = "البريد الإلكتروني",
+            )
+
+            AppSpacerHeight()
+
+            var phone by remember { mutableStateOf("") }
+            MainEditTextFramed(
+                text = phone,
+                onTextChange = { phone = it },
+                label = "01014044773",
+                aboveText = "رقم الهاتف",
+                trailingIcon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_wonder_mark),
+                        contentDescription = null,
+                        tint = SkyColorBlue
+                    )
+                }
+            )
+
+            AppSpacerHeight()
+
+            var idNumber by remember { mutableStateOf("") }
+            MainEditTextFramed(
+                text = idNumber,
+                onTextChange = { idNumber = it },
+                label = "5643216546512165",
+                aboveText = "رقم البطاقة",
+            )
         }
     }
 }

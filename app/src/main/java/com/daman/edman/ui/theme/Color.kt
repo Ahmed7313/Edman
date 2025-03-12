@@ -40,5 +40,6 @@ val lightGreenColor = Color(0x4D67BD23)
 val lightGrayColor = Color(0x60E6E6E6)
 val yelloColor = Color(0xFFF79E1B)
 val visaColor = Color(0xFF191B73)
+val blueColor = Color(0xFF18569A)
 
 val TintRedColor = Color(0x99CC3B3B)
