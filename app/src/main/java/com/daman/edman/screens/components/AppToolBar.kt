@@ -22,6 +22,7 @@ import com.daman.edman.R
 @Composable
  fun AppToolBar(
     modifier: Modifier = Modifier,
+    backView : Boolean = false,
     onClick : () -> Unit
 ) {
 
@@ -46,7 +47,7 @@ import com.daman.edman.R
         )
 
         Image(
-            painter = painterResource(id = R.drawable.ic_notification),
+            painter = painterResource(id = if (backView) R.drawable.ic_back else  R.drawable.ic_notification),
             contentDescription = "Menu",
             modifier = Modifier
                 .width(28.dp)
@@ -54,4 +55,10 @@ import com.daman.edman.R
                 .clickable { onClick() }
         )
     }
+}
+
+@Preview
+@Composable
+fun AppToolBarPreview() {
+    AppToolBar() {}
 }

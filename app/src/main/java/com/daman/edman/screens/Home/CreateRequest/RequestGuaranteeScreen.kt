@@ -1,6 +1,5 @@
 package com.daman.edman.screens.Home.CreateRequest
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -17,7 +16,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,7 +30,6 @@ import androidx.compose.ui.unit.dp
 import com.aramex.mypos.Presentation.Components.MainEditText
 import com.daman.edman.R
 import com.daman.edman.screens.components.AppSpacer
-import com.daman.edman.screens.components.CheckedItem
 import com.daman.edman.screens.components.HeaderText
 import com.daman.edman.screens.components.IconTextView
 import com.daman.edman.screens.components.NormalText
@@ -40,7 +37,6 @@ import com.daman.edman.screens.components.UserInfoItem
 import com.daman.edman.ui.theme.SkyColor
 import com.daman.edman.ui.theme.borderColor
 import com.daman.edman.ui.theme.buttonColor
-import com.daman.edman.ui.theme.grayColor
 import com.trend.camelx.ui.theme.large
 import com.trend.camelx.ui.theme.medium
 import com.trend.camelx.ui.theme.spacing
@@ -48,7 +44,7 @@ import com.trend.thecontent.screens.components.MainButton
 
 @Preview(showBackground = true)
 @Composable
-fun RequestGuaranteeScreen() {
+fun RequestScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()

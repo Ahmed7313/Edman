@@ -7,9 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.daman.edman.screens.Auth.Login.LoginScreen
 import com.daman.edman.screens.ContainerScreen
-import com.daman.edman.screens.Home.CreateRequest.RequestGuaranteeScreen
+import com.daman.edman.screens.Home.CreateRequest.RequestScreen
 import com.daman.edman.screens.Home.HomeScreen
 import com.daman.edman.screens.MyOrders.MyOrdersScreen
 import com.daman.edman.screens.Profile.ProfileScreen
@@ -47,7 +46,7 @@ fun SetUpHomeNavGraph (navController : NavHostController, modifier: Modifier = M
 
 
         composable<RequestGuaranteeScreen> {
-            RequestGuaranteeScreen()
+            RequestScreen()
         }
     }
 }

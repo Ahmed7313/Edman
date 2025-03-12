@@ -74,6 +74,7 @@ fun MainEditText(
     keyboardType: KeyboardOptions = KeyboardOptions.Default,
     textAlign: Boolean = false,
     readOnly: Boolean = false,
+    eraseBorder : Boolean = false,
     shape: RoundedCornerShape = RoundedCornerShape(8.dp),
     enabled: Boolean = true,
     imeAction: ImeAction = ImeAction.Done, // New argument to specify IME action
@@ -100,8 +101,8 @@ fun MainEditText(
             .focusRequester(focusRequester), // Add focusRequester to control focus
         interactionSource = interactionSource,
         colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = Color.Black,
-            unfocusedBorderColor = borderColor,
+            focusedBorderColor = if (eraseBorder) Color.Transparent else Color.Black,
+            unfocusedBorderColor = if (eraseBorder) Color.Transparent else borderColor,
             focusedTextColor = Color.Black,
             unfocusedTextColor = Color.Black,
         ),
@@ -151,6 +152,8 @@ fun MainEditText(
     )
 }
 
+
+
 @Composable
 fun MainEditTextWithoutIcon(
     modifier: Modifier = Modifier,
@@ -164,6 +167,7 @@ fun MainEditTextWithoutIcon(
     keyboardType: KeyboardOptions = KeyboardOptions.Default,
     textAlign: Boolean = false,
     readOnly: Boolean = false,
+    eraseBorder : Boolean = false,
     showLabelFocused: Boolean = false
 ) { // Added parameter to control label visibility) {
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -219,8 +223,8 @@ fun MainEditTextWithoutIcon(
 //                    focusManager.clearFocus(true)
             interactionSource = interactionSource,
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = Color.Black,
-                unfocusedBorderColor = borderColor,
+                focusedBorderColor = if (eraseBorder) Color.Transparent else Color.Black,
+                unfocusedBorderColor = if (eraseBorder) Color.Transparent else borderColor,
                 focusedTextColor = Color.Black,
                 unfocusedTextColor = Color.Black,
             ),
