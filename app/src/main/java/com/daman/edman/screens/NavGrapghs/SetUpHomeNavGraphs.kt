@@ -9,8 +9,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.daman.edman.screens.ContainerScreen
 import com.daman.edman.screens.Home.CreateRequest.RequestScreen
+import com.daman.edman.screens.Home.GarantieRequest.CreateRequestScreen
 import com.daman.edman.screens.Home.HomeScreen
 import com.daman.edman.screens.MyOrders.MyOrdersScreen
+import com.daman.edman.screens.MyOrders.orderdetails.OrderDetailsScreen
 import com.daman.edman.screens.Profile.ProfileScreen
 import com.daman.edman.screens.Wallet.WalletScreen
 import compose.material.theme.bottomnav.BottomBarScreen
@@ -23,11 +25,11 @@ fun SetUpHomeNavGraph (navController : NavHostController, modifier: Modifier = M
     NavHost(navController = navController, startDestination = BottomBarScreen.Home.route, modifier = modifier) {
 
         composable(BottomBarScreen.Home.route) {
-            HomeScreen()
+            HomeScreen(navController = navController)
         }
 
         composable(BottomBarScreen.MyOrders.route) {
-            MyOrdersScreen()
+            MyOrdersScreen(navController)
         }
 
         composable(BottomBarScreen.Wallet.route) {
@@ -45,8 +47,16 @@ fun SetUpHomeNavGraph (navController : NavHostController, modifier: Modifier = M
         loginNavGraph(navController = navController)
 
 
-        composable<RequestGuaranteeScreen> {
-            RequestScreen()
+        composable<RequestScreen> {
+            RequestScreen(navController)
+        }
+
+        composable<CreateRequestScreen> {
+            CreateRequestScreen(navHostController = navController)
+        }
+
+        composable<OrderDetailsScreen> {
+            OrderDetailsScreen()
         }
     }
 }

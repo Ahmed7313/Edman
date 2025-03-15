@@ -1,6 +1,7 @@
 package com.daman.edman.screens.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,10 +24,14 @@ fun UserInfoItem (
     name : String,
     phone : String,
     email : String,
-    id : String
+    id : String,
+    onClick : () -> Unit = {}
 ){
     Surface(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth()
+            .clickable {
+                onClick()
+            },
         shape = RoundedCornerShape(large),
         border = BorderStroke(width = 1.dp, color = grayColor)
     ) {

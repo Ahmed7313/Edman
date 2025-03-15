@@ -41,7 +41,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.aramex.mypos.Presentation.Components.MainEditText
+import com.aramex.mypos.Presentation.NavGrapghs.RequestScreen
 import com.daman.edman.screens.Home.HomeViewModel.CompleteUserModel
 import com.daman.edman.screens.components.AppToolBar
 import com.daman.edman.ui.theme.SkyColor
@@ -52,9 +55,9 @@ import com.trend.thecontent.screens.components.MainButton
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = true)
 @Composable
 fun HomeScreen(
+    navController: NavHostController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     Column(
@@ -161,6 +164,8 @@ fun HomeScreen(
                                     .clickable {
                                         if (!viewModel.userFinishedOnBoarding()) {
                                             showBottomSheet = true
+                                        }else{
+                                            navController.navigate(RequestScreen)
                                         }
                                     }
                                     .background(
@@ -188,6 +193,8 @@ fun HomeScreen(
                                     .clickable {
                                         if (!viewModel.userFinishedOnBoarding()) {
                                             showBottomSheet = true
+                                        }else{
+                                            navController.navigate(RequestScreen)
                                         }
                                     }
                                     .background(

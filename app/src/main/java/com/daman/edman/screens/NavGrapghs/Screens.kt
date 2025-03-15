@@ -21,5 +21,16 @@ object HomeScreen
 object SplashScreen
 
 @Serializable
-object RequestGuaranteeScreen
+object RequestScreen
+
+@Serializable
+object RequestGuaranteeDetailsScreen
+
+@Serializable
+object CreateRequestScreen
+
+
+@Serializable
+object OrderDetailsScreen
+
 

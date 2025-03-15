@@ -16,12 +16,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.daman.edman.R
 import com.trend.camelx.ui.theme.large
 
 @Composable
 fun ToolBarView(
-    text: String
+    text: String,
+    navHostController: NavHostController = rememberNavController()
 ) {
 
     Box(modifier = Modifier
@@ -38,7 +41,7 @@ fun ToolBarView(
                 .size(24.dp)
                 .align(Alignment.CenterStart)
                 .clickable {
-
+                    navHostController.popBackStack()
                 }
         )
 
@@ -49,5 +52,5 @@ fun ToolBarView(
 @Preview
 @Composable
 fun ToolBarViewPreview() {
-    ToolBarView(text = "Tool Bar View")
+    ToolBarView(text = "Tool Bar View", navHostController = rememberNavController())
 }

@@ -73,13 +73,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.*
+import androidx.navigation.NavHostController
+import com.aramex.mypos.Presentation.NavGrapghs.OrderDetailsScreen
 import com.daman.edman.screens.components.AppSpacerHeight
 
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = true)
 @Composable
-fun MyOrdersScreen(modifier: Modifier = Modifier) {
+fun MyOrdersScreen(navHostController: NavHostController) {
 
 
     val sheetState = rememberModalBottomSheetState()
@@ -149,7 +150,9 @@ fun MyOrdersScreen(modifier: Modifier = Modifier) {
                 deliveryDuration = "اليوم",
                 description = "طلبك برقم 0015584 لضمان وصول شحنتك ( Bed 30×140×200cm - Beige - GO.W.2-2B )",
                 total = "500",
-                onClick = {}
+                onClick = {
+                    navHostController.navigate(OrderDetailsScreen)
+                }
             )
 
             AppSpacer(height = large)
@@ -165,7 +168,9 @@ fun MyOrdersScreen(modifier: Modifier = Modifier) {
                 deliveryDuration = "اليوم",
                 description = "طلبك برقم 0015584 لضمان وصول شحنتك ( Bed 30×140×200cm - Beige - GO.W.2-2B )",
                 total = "500",
-                onClick = {}
+                onClick = {
+                    navHostController.navigate(OrderDetailsScreen)
+                }
             )
 
             AppSpacer(height = large)
@@ -176,7 +181,9 @@ fun MyOrdersScreen(modifier: Modifier = Modifier) {
                 deliveryDuration = "اليوم",
                 description = "طلبك برقم 0015584 لضمان وصول شحنتك ( Bed 30×140×200cm - Beige - GO.W.2-2B )",
                 total = "500",
-                onClick = {}
+                onClick = {
+                    navHostController.navigate(OrderDetailsScreen)
+                }
             )
 
         }

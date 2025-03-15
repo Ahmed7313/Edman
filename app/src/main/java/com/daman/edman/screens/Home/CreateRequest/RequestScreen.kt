@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,12 +29,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.aramex.mypos.Presentation.Components.MainEditText
+import com.aramex.mypos.Presentation.NavGrapghs.CreateRequestScreen
 import com.daman.edman.R
 import com.daman.edman.screens.components.AppSpacer
 import com.daman.edman.screens.components.HeaderText
 import com.daman.edman.screens.components.IconTextView
 import com.daman.edman.screens.components.NormalText
+import com.daman.edman.screens.components.ToolBarView
 import com.daman.edman.screens.components.UserInfoItem
 import com.daman.edman.ui.theme.SkyColor
 import com.daman.edman.ui.theme.borderColor
@@ -42,87 +47,106 @@ import com.trend.camelx.ui.theme.medium
 import com.trend.camelx.ui.theme.spacing
 import com.trend.thecontent.screens.components.MainButton
 
-@Preview(showBackground = true)
 @Composable
-fun RequestScreen() {
+fun RequestScreen(
+    navController: NavHostController,
+) {
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(start = spacing, end = spacing, top = large, bottom = large)
-
+            .background(color = Color.White)
     ) {
+        ToolBarView("طلب ضمان", navHostController = navController)
 
-
-        Image(
-            painter = painterResource(id = R.drawable.logo_1_1),
-            contentDescription = null,
+        Column(
             modifier = Modifier
-                .size(50.dp)
-        )
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
 
-        AppSpacer(height = 24.dp)
-
-        HeaderText(text = "اطلب خدمتك مع اضمن", fontSize = 16)
-        AppSpacer(height = large)
-        NormalText(
-            text = "يمكنك طلب هذه الخدمة لضمان وصول شحنتك أو استلام فلوسك بطريقة فعالة و سهلة.",
-            fontSize = 14
-        )
-
-        AppSpacer(height = spacing)
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
         ) {
-            HeaderText(text = "بياناتك", fontSize = 16)
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(start = spacing, end = spacing, top = large, bottom = large)
 
-            HeaderText(text = "تعديل", fontSize = 14, color = SkyColor)
+            ) {
+
+
+                Image(
+                    painter = painterResource(id = R.drawable.logo_1_1),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(50.dp)
+                )
+
+                AppSpacer(height = 24.dp)
+
+                HeaderText(text = "اطلب خدمتك مع اضمن", fontSize = 16)
+                AppSpacer(height = large)
+                NormalText(
+                    text = "يمكنك طلب هذه الخدمة لضمان وصول شحنتك أو استلام فلوسك بطريقة فعالة و سهلة.",
+                    fontSize = 14
+                )
+
+                AppSpacer(height = spacing)
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    HeaderText(text = "بياناتك", fontSize = 16)
+
+                    HeaderText(text = "تعديل", fontSize = 14, color = SkyColor)
+                }
+
+                AppSpacer(height = large)
+
+                UserInfoItem(
+                    name = "محمد عبد الرحمن",
+                    phone = "01000000000",
+                    email = "ahmedraboe@gmail.com",
+                    id = "123456789012345"
+                )
+
+
+                AppSpacer(height = spacing)
+
+                HeaderText(text = "نوع ضمانك", fontSize = 16)
+
+
+                AppSpacer(height = large)
+
+                GuaranteeSelectionScreen(navController)
+
+                AppSpacer(height = spacing)
+
+
+                MainButton(
+                    text = "المتابعة"
+                ) {
+
+                }
+
+                AppSpacer(height = spacing)
+
+                HeaderText(
+                    text = "إلغاء",
+                    fontSize = 16,
+                    color = buttonColor,
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                )
+            }
         }
-
-        AppSpacer(height = large)
-
-        UserInfoItem(
-            name = "محمد عبد الرحمن",
-            phone = "01000000000",
-            email = "ahmedraboe@gmail.com",
-            id = "123456789012345"
-        )
-
-
-        AppSpacer(height = spacing)
-
-        HeaderText(text = "نوع ضمانك", fontSize = 16)
-
-
-        AppSpacer(height = large)
-
-        GuaranteeSelectionScreen()
-
-        AppSpacer(height = spacing)
-
-
-        MainButton(
-            text = "المتابعة"
-        ) {
-
-        }
-
-        AppSpacer(height = spacing)
-
-        HeaderText(
-            text = "إلغاء",
-            fontSize = 16,
-            color = buttonColor,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
     }
 }
 
 // Main Screen
 @Composable
-fun GuaranteeSelectionScreen() {
+fun GuaranteeSelectionScreen(
+    navController: NavHostController
+) {
     var selectedTab by remember { mutableStateOf(0) }
 
     Column {
@@ -154,8 +178,8 @@ fun GuaranteeSelectionScreen() {
 
         // Dynamic Content
         when (selectedTab) {
-            0 -> PaymentGuaranteeContent()
-            1 -> ReceiptGuaranteeContent()
+            0 -> PaymentGuaranteeContent(navController)
+            1 -> ReceiptGuaranteeContent(navController)
         }
     }
 }
@@ -203,7 +227,7 @@ fun SelectionButton(
 
 // Content Screens
 @Composable
-fun PaymentGuaranteeContent() {
+fun PaymentGuaranteeContent(navController: NavHostController) {
     // Your payment guarantee UI here
     Column(modifier = Modifier.fillMaxWidth()) {
         HeaderText(text = "بائع مشترياتك")
@@ -251,14 +275,16 @@ fun PaymentGuaranteeContent() {
             phone = "01000000000",
             email = "asda@gmail.com",
             id = "123456789012345"
-        )
+        ) {
+            navController.navigate(CreateRequestScreen)
+        }
 
     }
 
 }
 
 @Composable
-fun ReceiptGuaranteeContent() {
+fun ReceiptGuaranteeContent(navController: NavHostController) {
 
     Column(modifier = Modifier.fillMaxWidth()) {
         HeaderText(text = "بائع مشترياتك")
@@ -306,7 +332,9 @@ fun ReceiptGuaranteeContent() {
             phone = "01000000000",
             email = "asda@gmail.com",
             id = "123456789012345"
-        )
+        ) {
+            navController.navigate(CreateRequestScreen)
+        }
 
     }
 
