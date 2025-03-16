@@ -186,6 +186,7 @@ fun MyOrdersScreen(navHostController: NavHostController) {
                 }
             )
 
+            AppSpacer(height = 90.dp)
         }
 
 
