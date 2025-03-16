@@ -24,6 +24,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.aramex.mypos.Presentation.NavGrapghs.ChargeWalletScreen
 import com.daman.edman.R
 import com.daman.edman.screens.components.AppSpacer
 import com.daman.edman.screens.components.AppSpacerHeight
@@ -37,9 +39,8 @@ import com.trend.camelx.ui.theme.large
 import com.trend.camelx.ui.theme.medium
 import com.trend.thecontent.screens.components.MainButton
 
-@Preview(showBackground = true)
 @Composable
-fun WalletScreen() {
+fun WalletScreen(navHostController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -64,7 +65,9 @@ fun WalletScreen() {
 
                 AppSpacer(height = large)
 
-                MainButton(text = "شحن المحفظة") { }
+                MainButton(text = "شحن المحفظة") {
+                    navHostController.navigate(ChargeWalletScreen)
+                }
             }
 
             AppSpacerHeight()

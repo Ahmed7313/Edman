@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.daman.edman.R
 import com.daman.edman.screens.Home.HomeViewModel
 import com.daman.edman.screens.components.AppSpacer
@@ -54,9 +55,8 @@ import com.trend.camelx.ui.theme.spacing
 import com.trend.thecontent.screens.components.MainButton
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview
 @Composable
-fun OrderDetailsScreen() {
+fun OrderDetailsScreen(navHostController: NavHostController) {
 
 
     val sheetState = rememberModalBottomSheetState()
@@ -68,7 +68,7 @@ fun OrderDetailsScreen() {
             .background(color = Color.White)
     ) {
 
-        ToolBarView("تفاصيل طلب")
+        ToolBarView("تفاصيل طلب", navHostController = navHostController)
 
         Column(
             modifier = Modifier

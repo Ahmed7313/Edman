@@ -33,4 +33,17 @@ object CreateRequestScreen
 @Serializable
 object OrderDetailsScreen
 
+@Serializable
+object ChargeWalletScreen
 
+@Serializable
+object UserProfileScreen
+
+@Serializable
+object AddCardScreen
+
+@Serializable
+object CreditCardsScreen
+
+@Serializable
+object NotificationScreen

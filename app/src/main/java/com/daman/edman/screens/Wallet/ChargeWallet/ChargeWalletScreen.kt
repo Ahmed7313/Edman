@@ -2,6 +2,7 @@ package com.daman.edman.screens.Wallet.ChargeWallet
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.aramex.mypos.Presentation.Components.MainEditText
 import com.aramex.mypos.Presentation.Components.MainEditTextFramed
 import com.aramex.mypos.Presentation.Components.MainEditTextWithoutIcon
@@ -44,9 +46,10 @@ import com.trend.camelx.ui.theme.medium
 import com.trend.camelx.ui.theme.spacing
 import com.trend.thecontent.screens.components.MainButton
 
-@Preview(showBackground = true)
 @Composable
-private fun ChargeWalletScreen() {
+ fun ChargeWalletScreen(
+    navHostController : NavHostController
+) {
 
     Column(
         modifier = Modifier
@@ -54,7 +57,7 @@ private fun ChargeWalletScreen() {
             .background(color = Color.White)
     ) {
 
-        ToolBarView("شحن رصيد")
+        ToolBarView("شحن رصيد", navHostController = navHostController)
 
         Column(
             modifier = Modifier
@@ -138,7 +141,9 @@ private fun ChargeWalletScreen() {
                 text = "إلغاء",
                 fontSize = 16,
                 color = buttonColor,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+                modifier = Modifier.align(Alignment.CenterHorizontally).clickable {
+                    navHostController.popBackStack()
+                }
             )
         }
 

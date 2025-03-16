@@ -291,7 +291,7 @@ fun MainEditTextFramed(
     val focusManager = LocalFocusManager.current
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .border(width = 1.dp, color = Color.Gray, shape = shape)
     ) {

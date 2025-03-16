@@ -44,6 +44,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.aramex.mypos.Presentation.Components.MainEditText
+import com.aramex.mypos.Presentation.NavGrapghs.NotificationScreen
 import com.aramex.mypos.Presentation.NavGrapghs.RequestScreen
 import com.daman.edman.screens.Home.HomeViewModel.CompleteUserModel
 import com.daman.edman.screens.components.AppToolBar
@@ -70,7 +71,9 @@ fun HomeScreen(
         val scope = rememberCoroutineScope()
         var showBottomSheet by remember { mutableStateOf(false) }
 
-        AppToolBar {}
+        AppToolBar {
+            navController.navigate(NotificationScreen)
+        }
 
 
 

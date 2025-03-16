@@ -33,15 +33,15 @@ import com.trend.camelx.ui.theme.spacing
 @Composable
 fun OrderItem(
     modifier: Modifier = Modifier,
-    statues : String,
-    orderedIn : String,
-    deliveryDuration : String,
-    description : String,
-    total : String,
-    onClick : () -> Unit
+    statues: String,
+    orderedIn: String,
+    deliveryDuration: String,
+    description: String,
+    total: String,
+    onClick: () -> Unit
 ) {
 
-    BorderView (modifier = Modifier.clickable { onClick() }){
+    BorderView(modifier = Modifier.clickable { onClick() }) {
 
         Row(
             modifier = modifier.fillMaxWidth(),
@@ -70,42 +70,44 @@ fun OrderItem(
             modifier = Modifier.fillMaxWidth(),
         ) {
 
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_black_box),
-                    contentDescription = null,
-                    modifier = Modifier.size(24.dp),
-                )
-                AppSpacer(width = 8.dp)
+            Icon(
+                painter = painterResource(id = R.drawable.ic_black_box),
+                contentDescription = null,
+                modifier = Modifier.size(24.dp),
+            )
+            AppSpacer(width = 8.dp)
 
-                Column {
-                    Row(
-                        modifier = Modifier,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        HeaderText(text = "مدة التوصيل", fontSize = 14)
-                        AppSpacer(width = medium)
-                        HeaderText(text = deliveryDuration, color = SkyColorBlue, fontSize = 12)
-                    }
-
-                    AppSpacer(height = large)
-
-                    HeaderText(text = "طلب ضمان وصول منتجات", fontSize = 14)
-
-                    AppSpacer(height = medium)
-
-                    NormalText(text = description)
+            Column {
+                Row(
+                    modifier = Modifier,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    HeaderText(text = "مدة التوصيل", fontSize = 14)
+                    AppSpacer(width = medium)
+                    HeaderText(text = deliveryDuration, color = SkyColorBlue, fontSize = 12)
                 }
 
+                AppSpacer(height = large)
+
+                HeaderText(text = "طلب ضمان وصول منتجات", fontSize = 14)
+
+                AppSpacer(height = medium)
+
+                NormalText(text = description)
             }
+
+        }
         AppSpacer(height = large)
 
         HorizontalDivider()
 
         AppSpacer(height = spacing)
 
-        Row (modifier = Modifier.fillMaxWidth(),
+        Row(
+            modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically){
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             HeaderText(text = "المجموع", color = SkyColorBlue, fontSize = 14)
             HeaderText(text = "$total EGP", color = SkyColorBlue, fontSize = 14)
         }

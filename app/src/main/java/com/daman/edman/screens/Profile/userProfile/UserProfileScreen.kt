@@ -30,6 +30,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 import com.aramex.mypos.Presentation.Components.MainEditTextFramed
@@ -40,9 +41,8 @@ import com.daman.edman.screens.components.ToolBarView
 import com.daman.edman.ui.theme.SkyColorBlue
 import com.trend.camelx.ui.theme.large
 
-@Preview(showBackground = true)
 @Composable
-fun UserProfileScreen() {
+fun UserProfileScreen(navHostController: NavHostController) {
 
 
     Column(
@@ -50,7 +50,7 @@ fun UserProfileScreen() {
             .fillMaxSize()
             .background(color = Color.White)
     ) {
-        ToolBarView("الملف الشخصي")
+        ToolBarView("الملف الشخصي", navHostController)
 
         AppSpacerHeight()
 

@@ -11,9 +11,14 @@ import com.daman.edman.screens.ContainerScreen
 import com.daman.edman.screens.Home.CreateRequest.RequestScreen
 import com.daman.edman.screens.Home.GarantieRequest.CreateRequestScreen
 import com.daman.edman.screens.Home.HomeScreen
+import com.daman.edman.screens.Home.Notifications.NotificationsScreen
 import com.daman.edman.screens.MyOrders.MyOrdersScreen
 import com.daman.edman.screens.MyOrders.orderdetails.OrderDetailsScreen
+import com.daman.edman.screens.Profile.CreditCards.AddCardsScreen
+import com.daman.edman.screens.Profile.CreditCards.CreditCardsScreen
 import com.daman.edman.screens.Profile.ProfileScreen
+import com.daman.edman.screens.Profile.userProfile.UserProfileScreen
+import com.daman.edman.screens.Wallet.ChargeWallet.ChargeWalletScreen
 import com.daman.edman.screens.Wallet.WalletScreen
 import compose.material.theme.bottomnav.BottomBarScreen
 
@@ -33,11 +38,11 @@ fun SetUpHomeNavGraph (navController : NavHostController, modifier: Modifier = M
         }
 
         composable(BottomBarScreen.Wallet.route) {
-            WalletScreen()
+            WalletScreen(navController)
         }
 
         composable(BottomBarScreen.Profile.route) {
-             ProfileScreen()
+             ProfileScreen(navController)
         }
 
         composable<ContainerScreen> {
@@ -56,7 +61,27 @@ fun SetUpHomeNavGraph (navController : NavHostController, modifier: Modifier = M
         }
 
         composable<OrderDetailsScreen> {
-            OrderDetailsScreen()
+            OrderDetailsScreen(navController)
+        }
+
+        composable<ChargeWalletScreen> {
+            ChargeWalletScreen(navHostController = navController)
+        }
+
+        composable<UserProfileScreen> {
+            UserProfileScreen(navController)
+        }
+
+        composable<AddCardScreen> {
+            AddCardsScreen(navController)
+        }
+
+        composable<CreditCardsScreen> {
+            CreditCardsScreen(navController)
+        }
+
+        composable<NotificationScreen> {
+            NotificationsScreen(navController)
         }
     }
 }
