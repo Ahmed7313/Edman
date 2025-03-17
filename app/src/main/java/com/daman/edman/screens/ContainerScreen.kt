@@ -72,11 +72,6 @@ fun BottomBar(navController: NavHostController) {
         BottomBarScreen.Profile
     )
 
-//    val screenDetails = listOf(
-//        Screen.AllCampaignsScreen,
-//        Screen.CampaignsScreen,
-//        Screen.CompletedCampaignsScreen
-//    )
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination

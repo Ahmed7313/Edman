@@ -8,5 +8,16 @@
     <string name="my_orders">طلباتي</string>
     <string name="wallet">المحفظة</string>
     <string name="profle">حسابي</string>
+    <string name="available_blanace">رصيدك المتاح</string>
+    <string name="charge_wallet">شحن المحفظة</string>
+    <string name="previouse_operations">عملياتك السابقة</string>
+    <string name="recieve_from_buyer">استلام دفع من مشتري</string>
+    <string name="cancel">إلغاء</string>
+    <string name="_500_egp_01155487795">تم استلام 500 EGP من محمد علي رقم المحفظة   01155487795</string>
+    <string name="add_balance_now">اشحن  الآن</string>
+    <string name="balance">الرصيد</string>
+    <string name="add_balance">شحن رصيد</string>
+    <string name="add_balance_in_edman">"شحن رصيدك في اضمن "</string>
+    <string name="add_balance_details">يمكنك شحن رصيدك في اضمن من خلال الخطوات التالية:</string>
 
 </resources>

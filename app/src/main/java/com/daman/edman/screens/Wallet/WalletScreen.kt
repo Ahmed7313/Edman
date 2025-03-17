@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -59,20 +60,20 @@ fun WalletScreen(navHostController: NavHostController) {
                 .padding(large)
         ) {
             BorderView {
-                HeaderText(text = "رصيدك المتاح", fontSize = 12)
+                HeaderText(text = stringResource(R.string.available_blanace), fontSize = 12)
                 AppSpacer(height = large)
                 HeaderText(text = "0.0 EGP", fontSize = 32, color = SkyColorBlue)
 
                 AppSpacer(height = large)
 
-                MainButton(text = "شحن المحفظة") {
+                MainButton(text = stringResource(R.string.charge_wallet)) {
                     navHostController.navigate(ChargeWalletScreen)
                 }
             }
 
             AppSpacerHeight()
 
-            NormalText(text = "عملياتك السابقة", fontSize = 16)
+            NormalText(text = stringResource(R.string.previouse_operations), fontSize = 16)
 
             LazyColumn {
                 item {
@@ -80,8 +81,8 @@ fun WalletScreen(navHostController: NavHostController) {
                     AppSpacerHeight()
 
                     WalletItem(
-                        headerText = "استلام دفع من مشتري",
-                        subText = "تم استلام 500 EGP من محمد علي رقم المحفظة   01155487795"
+                        headerText = stringResource(R.string.recieve_from_buyer),
+                        subText = stringResource(R.string._500_egp_01155487795)
                     )
                 }
             }

@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -57,7 +58,7 @@ import com.trend.thecontent.screens.components.MainButton
             .background(color = Color.White)
     ) {
 
-        ToolBarView("شحن رصيد", navHostController = navHostController)
+        ToolBarView(stringResource(R.string.add_balance), navHostController = navHostController)
 
         Column(
             modifier = Modifier
@@ -75,10 +76,10 @@ import com.trend.thecontent.screens.components.MainButton
 
             AppSpacer(height = 24.dp)
 
-            HeaderText(text = "شحن رصيدك في اضمن ", fontSize = 16)
+            HeaderText(text = stringResource(R.string.add_balance_in_edman), fontSize = 16)
             AppSpacer(height = large)
             NormalText(
-                text = "يمكنك شحن رصيدك في اضمن من خلال الخطوات التالية:",
+                text = stringResource(R.string.add_balance_details),
                 fontSize = 14
             )
 
@@ -86,7 +87,7 @@ import com.trend.thecontent.screens.components.MainButton
 
             IconTextView(
                 icon = R.drawable.ic_money_black,
-                text = "الرصيد"
+                text = stringResource(R.string.balance)
             )
 
             AppSpacerHeight()
@@ -94,7 +95,7 @@ import com.trend.thecontent.screens.components.MainButton
             BorderView {
 
                 Row (verticalAlignment = Alignment.CenterVertically){
-                    NormalText(text = "الرصيد", fontSize = 12)
+                    NormalText(text = stringResource(R.string.balance), fontSize = 12)
                     AppSpacer(width = medium)
                     Icon(
                         painter = painterResource(R.drawable.ic_wonder_mark),
@@ -119,10 +120,14 @@ import com.trend.thecontent.screens.components.MainButton
                         isError = priceError,
                         eraseBorder = true,
                         label = "0.00",
-                        modifier = Modifier.wrapContentWidth().width(150.dp)
+                        modifier = Modifier
+                            .wrapContentWidth()
+                            .width(150.dp)
                     )
 
-                    HeaderText(text = "EGP", fontSize = 12, modifier = Modifier.weight(1f).padding(top = 12.dp))
+                    HeaderText(text = "EGP", fontSize = 12, modifier = Modifier
+                        .weight(1f)
+                        .padding(top = 12.dp))
                 }
             }
 
@@ -130,7 +135,7 @@ import com.trend.thecontent.screens.components.MainButton
             AppSpacer(height = 90.dp)
 
             MainButton(
-                text = "اشحن  الآن"
+                text = stringResource(R.string.add_balance_now)
             ) {
 
             }
@@ -138,12 +143,14 @@ import com.trend.thecontent.screens.components.MainButton
             AppSpacer(height = spacing)
 
             HeaderText(
-                text = "إلغاء",
+                text = stringResource(R.string.cancel),
                 fontSize = 16,
                 color = buttonColor,
-                modifier = Modifier.align(Alignment.CenterHorizontally).clickable {
-                    navHostController.popBackStack()
-                }
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .clickable {
+                        navHostController.popBackStack()
+                    }
             )
         }
 
