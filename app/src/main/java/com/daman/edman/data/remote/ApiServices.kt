@@ -4,6 +4,7 @@ package com.aramex.mypos.Data.remote
 import com.daman.edman.data.remote.DTO.ChangeUserInfo.CompleteUserResponse
 import com.daman.edman.data.remote.DTO.Login.LoginResponseDTO
 import com.daman.edman.data.remote.DTO.OTPResponse.CodeResponse
+import com.daman.edman.data.remote.DTO.OrderDTO.OrderDTO
 import com.daman.edman.data.remote.DTO.SearchDTO.SearchDTO
 import okhttp3.RequestBody
 import retrofit2.http.Body
@@ -35,4 +36,9 @@ interface ApiServices {
     suspend fun searchUser(
         @Query("phone") phone: String
     ): SearchDTO
+
+    @POST("order")
+    suspend fun createOrder(
+        @Body body: RequestBody
+    ): OrderDTO
 }

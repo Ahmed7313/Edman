@@ -1,4 +1,4 @@
-package com.daman.edman.domain.UseCases.RequestUseCases
+package com.daman.edman.domain.UseCases.Home.RequestUseCases
 
 import com.aramex.mypos.Domain.ReposInterfaces.IHomeRepository
 import com.aramex.mypos.Domain.UseCases.BaseUseCase

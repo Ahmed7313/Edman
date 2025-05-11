@@ -10,7 +10,7 @@ import com.aramex.mypos.Data.remote.DataWrapper.Resource
 import com.aramex.mypos.Data.remote.DataWrapper.ResponseState
 import com.daman.edman.EdmanApp
 import com.daman.edman.data.remote.DTO.SearchDTO.Data
-import com.daman.edman.domain.UseCases.RequestUseCases.SearchUserUseCase
+import com.daman.edman.domain.UseCases.Home.RequestUseCases.SearchUserUseCase
 import com.trend.thecontent.data.local.preference.SavePreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
