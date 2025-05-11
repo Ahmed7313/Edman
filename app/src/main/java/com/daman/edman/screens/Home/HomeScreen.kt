@@ -48,6 +48,7 @@ import com.aramex.mypos.Presentation.NavGrapghs.NotificationScreen
 import com.aramex.mypos.Presentation.NavGrapghs.RequestScreen
 import com.daman.edman.screens.Home.HomeViewModel.CompleteUserModel
 import com.daman.edman.screens.components.AppToolBar
+import com.daman.edman.screens.components.CheckedItem
 import com.daman.edman.ui.theme.SkyColor
 import com.daman.edman.ui.theme.borderColor
 import com.daman.edman.ui.theme.buttonColor
@@ -167,7 +168,7 @@ fun HomeScreen(
                                     .clickable {
                                         if (!viewModel.userFinishedOnBoarding()) {
                                             showBottomSheet = true
-                                        }else{
+                                        } else {
                                             navController.navigate(RequestScreen)
                                         }
                                     }
@@ -177,7 +178,7 @@ fun HomeScreen(
                                     ),
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.Center
-                            ) { 
+                            ) {
                                 NormalText(text = "ضمان وصول", color = Color.White)
                                 AppSpacer(width = medium)
                                 Image(
@@ -196,7 +197,7 @@ fun HomeScreen(
                                     .clickable {
                                         if (!viewModel.userFinishedOnBoarding()) {
                                             showBottomSheet = true
-                                        }else{
+                                        } else {
                                             navController.navigate(RequestScreen)
                                         }
                                     }
@@ -247,7 +248,11 @@ fun HomeScreen(
                         Column {
                             NormalText(text = "الرصيد المتاح في محفظتك", fontSize = 14)
                             AppSpacer(height = medium)
-                            HeaderText(text = "500 EGP", fontSize = 18)
+                            HeaderText(
+                                text = if (viewModel.user.value.balance.isNullOrEmpty()) "0 EGP"
+                                else viewModel.user.value.balance + " EGP"
+                                    , fontSize = 18
+                            )
                             AppSpacer(height = medium)
 
                             Row(
@@ -261,7 +266,7 @@ fun HomeScreen(
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.Center
                             ) {
-                                NormalText(text = "+201155487795", color = Color.Gray)
+                                NormalText(text = viewModel.user.value.phone, color = Color.Gray)
                                 AppSpacer(width = medium)
                                 Image(
                                     painter = painterResource(id = R.drawable.ic_check),
@@ -338,32 +343,15 @@ fun BottomSheetView(
 
         AppSpacer(height = large)
 
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            NormalText(
-                text = user.phone, fontSize = 14,
-                modifier = Modifier.background(
-                    color = borderColor, shape = RoundedCornerShape(
-                        large
-                    )
-                )
-            )
-
-            AppSpacer(width = medium)
-            Image(
-                painter = painterResource(id = R.drawable.ic_check),
-                contentDescription = null,
-                modifier = Modifier.size(18.dp)
-            )
-        }
+        CheckedItem(
+            text = user.phone
+        )
 
         AppSpacer(width = spacing)
 
         MainEditText(
             text = name,
-            label = if (user.name == null)  "الاسم" else user.name!!,
+            label = if (user.name == null) "الاسم" else user.name!!,
             onTextChange = {
                 name = it
             },
@@ -378,7 +366,7 @@ fun BottomSheetView(
 
         MainEditText(
             text = email,
-            label = if (user.email == null)"البريد الالكتروني" else user.email!!,
+            label = if (user.email == null) "البريد الالكتروني" else user.email!!,
             onTextChange = {
                 email = it
             },
@@ -409,10 +397,10 @@ fun BottomSheetView(
         MainButton(text = "ابدأ طلبك") {
             viewModel.completeUserData(
                 CompleteUserModel(
-                name = name,
-                email = email,
-                idNumber = idNumber,
-                device = "android"
+                    name = name,
+                    email = email,
+                    idNumber = idNumber,
+                    device = "android"
                 )
             )
         }

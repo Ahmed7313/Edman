@@ -27,8 +27,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.aramex.mypos.Presentation.Components.MainEditText
 import com.aramex.mypos.Presentation.NavGrapghs.CreateRequestScreen
@@ -50,7 +50,8 @@ import com.trend.thecontent.screens.components.MainButton
 @Composable
 fun RequestScreen(
     navController: NavHostController,
-) {
+    viewModel: RequestViewModel = hiltViewModel(),
+    ) {
 
     Column(
         modifier = Modifier
@@ -104,10 +105,10 @@ fun RequestScreen(
                 AppSpacer(height = large)
 
                 UserInfoItem(
-                    name = "محمد عبد الرحمن",
-                    phone = "01000000000",
-                    email = "ahmedraboe@gmail.com",
-                    id = "123456789012345"
+                    name = viewModel.user.value.name ?:"",
+                    phone = viewModel.user.value.phone,
+                    email = viewModel.user.value.email ?: "",
+                    id = viewModel.user.value.id.toString()
                 )
 
 
