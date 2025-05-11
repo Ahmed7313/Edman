@@ -5,6 +5,7 @@ import com.aramex.mypos.Data.Repos.RegistrationRepository
 import com.aramex.mypos.Data.remote.ApiServices
 import com.aramex.mypos.Domain.ReposInterfaces.IHomeRepository
 import com.aramex.mypos.Domain.ReposInterfaces.IRegistrationRepository
+import com.daman.edman.domain.ReposInterfaces.ISearchRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,4 +24,5 @@ object  ReposModule {
     fun provideHomeRepository (api: ApiServices) : IHomeRepository {
         return HomeRepository(api)
     }
+
 }

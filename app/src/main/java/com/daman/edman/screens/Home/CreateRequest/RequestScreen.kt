@@ -19,6 +19,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -45,6 +46,7 @@ import com.daman.edman.ui.theme.buttonColor
 import com.trend.camelx.ui.theme.large
 import com.trend.camelx.ui.theme.medium
 import com.trend.camelx.ui.theme.spacing
+import com.trend.thecontent.screens.components.LoadingView
 import com.trend.thecontent.screens.components.MainButton
 
 @Composable
@@ -119,15 +121,22 @@ fun RequestScreen(
 
                 AppSpacer(height = large)
 
-                GuaranteeSelectionScreen(navController)
+                GuaranteeSelectionScreen(navController = navController, viewModel = viewModel)
 
                 AppSpacer(height = spacing)
 
 
-                MainButton(
-                    text = "المتابعة"
-                ) {
+                val searchResult by viewModel.searchResult.collectAsState()
+                val hasSearchResult = searchResult != null
 
+                MainButton(
+                    text = "المتابعة",
+                    enabled = hasSearchResult,
+                    color = if (hasSearchResult) buttonColor else Color(0xFFB7CBE0)
+                ) {
+                    if (hasSearchResult) {
+                        // Handle button click
+                    }
                 }
 
                 AppSpacer(height = spacing)
@@ -136,7 +145,9 @@ fun RequestScreen(
                     text = "إلغاء",
                     fontSize = 16,
                     color = buttonColor,
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                    modifier = Modifier.align(Alignment.CenterHorizontally).clickable {
+                        navController.popBackStack()
+                    }
                 )
             }
         }
@@ -146,6 +157,7 @@ fun RequestScreen(
 // Main Screen
 @Composable
 fun GuaranteeSelectionScreen(
+    viewModel : RequestViewModel,
     navController: NavHostController
 ) {
     var selectedTab by remember { mutableStateOf(0) }
@@ -179,8 +191,8 @@ fun GuaranteeSelectionScreen(
 
         // Dynamic Content
         when (selectedTab) {
-            0 -> PaymentGuaranteeContent(navController)
-            1 -> ReceiptGuaranteeContent(navController)
+            0 -> PaymentGuaranteeContent(navController, viewModel = viewModel)
+            1 -> ReceiptGuaranteeContent(navController, viewModel = viewModel)
         }
     }
 }
@@ -228,15 +240,19 @@ fun SelectionButton(
 
 // Content Screens
 @Composable
-fun PaymentGuaranteeContent(navController: NavHostController) {
-    // Your payment guarantee UI here
+fun PaymentGuaranteeContent(navController: NavHostController, viewModel: RequestViewModel) {
     Column(modifier = Modifier.fillMaxWidth()) {
         HeaderText(text = "بائع مشترياتك")
         AppSpacer(height = large)
         var searchQuery by remember { mutableStateOf("") }
         MainEditText(
             text = searchQuery,
-            onTextChange = { searchQuery = it },
+            onTextChange = { 
+                searchQuery = it
+                if (it.length >= 11) { // Assuming phone number is 11 digits
+                    viewModel.searchUser(it)
+                }
+            },
             label = "عن من تبحث؟",
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(spacing),
@@ -252,48 +268,59 @@ fun PaymentGuaranteeContent(navController: NavHostController) {
 
         AppSpacer(height = medium)
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            IconTextView(
-                text = "بيانات البائع",
-                icon = R.drawable.ic_truck
-            )
-
-            Icon(
-                painter = painterResource(id = R.drawable.ic_mark),
-                contentDescription = null,
-                modifier = Modifier.size(24.dp)
-            )
+        // Show loading state
+        val isLoading by viewModel.isLoadingProgressBar.collectAsState(initial = false)
+        if (isLoading) {
+            LoadingView(true)
         }
 
-        AppSpacer(height = medium)
+        // Show search results
+        viewModel.searchResult.collectAsState().value?.let { user ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconTextView(
+                    text = "بيانات البائع",
+                    icon = R.drawable.ic_truck
+                )
 
-        UserInfoItem(
-            name = "محمد عبد الرحمن",
-            phone = "01000000000",
-            email = "asda@gmail.com",
-            id = "123456789012345"
-        ) {
-            navController.navigate(CreateRequestScreen)
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_mark),
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp)
+                )
+            }
+
+            AppSpacer(height = medium)
+
+            UserInfoItem(
+                name = user.name ?: "",
+                phone = user.phone ?: "",
+                email = user.email ?: "",
+                id = user.id?.toString() ?: ""
+            ) {
+                navController.navigate(CreateRequestScreen)
+            }
         }
-
     }
-
 }
 
 @Composable
-fun ReceiptGuaranteeContent(navController: NavHostController) {
-
+fun ReceiptGuaranteeContent(navController: NavHostController, viewModel: RequestViewModel) {
     Column(modifier = Modifier.fillMaxWidth()) {
         HeaderText(text = "بائع مشترياتك")
         AppSpacer(height = large)
         var searchQuery by remember { mutableStateOf("") }
         MainEditText(
             text = searchQuery,
-            onTextChange = { searchQuery = it },
+            onTextChange = { 
+                searchQuery = it
+                if (it.length >= 11) { // Assuming phone number is 11 digits
+                    viewModel.searchUser(it)
+                }
+            },
             label = "عن من تبحث؟",
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(spacing),
@@ -309,34 +336,41 @@ fun ReceiptGuaranteeContent(navController: NavHostController) {
 
         AppSpacer(height = medium)
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            IconTextView(
-                text = "بيانات البائع",
-                icon = R.drawable.ic_truck
-            )
-
-            Icon(
-                painter = painterResource(id = R.drawable.ic_mark),
-                contentDescription = null,
-                modifier = Modifier.size(24.dp)
-            )
+        // Show loading state
+        val isLoading by viewModel.isLoadingProgressBar.collectAsState(initial = false)
+        if (isLoading) {
+            LoadingView(true)
         }
 
-        AppSpacer(height = medium)
+        // Show search results
+        viewModel.searchResult.collectAsState().value?.let { user ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconTextView(
+                    text = "بيانات البائع",
+                    icon = R.drawable.ic_truck
+                )
 
-        UserInfoItem(
-            name = "محمد عبد الرحمن",
-            phone = "01000000000",
-            email = "asda@gmail.com",
-            id = "123456789012345"
-        ) {
-            navController.navigate(CreateRequestScreen)
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_mark),
+                    contentDescription = null,
+                    modifier = Modifier.size(24.dp)
+                )
+            }
+
+            AppSpacer(height = medium)
+
+            UserInfoItem(
+                name = user.name ?: "",
+                phone = user.phone ?: "",
+                email = user.email ?: "",
+                id = user.id?.toString() ?: ""
+            ) {
+                navController.navigate(CreateRequestScreen)
+            }
         }
-
     }
-
 }
