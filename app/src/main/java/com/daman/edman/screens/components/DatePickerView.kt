@@ -70,7 +70,7 @@ fun DatePickerView(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                NormalText(text = if (selectedDate.isEmpty()) "DD/MM/YYYY" else selectedDate)
+                NormalText(text = if (selectedDate.isEmpty()) "YYYY-MM-DD" else selectedDate)
                 Icon(
                     painter = painterResource(id = R.drawable.ic_calendar),
                     contentDescription = null,
