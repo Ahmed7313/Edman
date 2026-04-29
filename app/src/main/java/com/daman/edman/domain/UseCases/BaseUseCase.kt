@@ -50,7 +50,14 @@ abstract class BaseUseCase<in P, T>(private val defaultParams: P? = null) {
     protected abstract suspend fun execute(params: P?): T
 
     private fun handleHttpException(exception: HttpException): String {
-        val errorMessage = parseErrorResponse(exception) ?: "Unknown error"
+        val parsedError = parseErrorResponse(exception)
+        
+        if (!parsedError.isNullOrBlank()) {
+            showError(parsedError)
+            return parsedError
+        }
+
+        val errorMessage = parsedError ?: "Unknown error"
         when (exception.code()) {
             HttpURLConnection.HTTP_NOT_FOUND -> {
                 val message = "Resource not found: $errorMessage"
@@ -78,9 +85,10 @@ abstract class BaseUseCase<in P, T>(private val defaultParams: P? = null) {
             val contentType = exception.response()?.headers()?.get("Content-Type")
             if (contentType?.contains("application/json") == true) {
                 val jsonObject = response?.let { JSONObject(it) }
-                val errorMessage = jsonObject?.optString("error")
-                    ?: jsonObject?.optString("message")
-                    ?: jsonObject?.optString("description")
+                val errorMessage = jsonObject?.optString("msg", null)
+                    ?: jsonObject?.optString("error", null)
+                    ?: jsonObject?.optString("message", null)
+                    ?: jsonObject?.optString("description", null)
                 Timber.tag(TAG).d("Parsed error message: $errorMessage")
                 errorMessage
             } else {

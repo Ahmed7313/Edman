@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.daman.edman.screens.ContainerScreen
 import com.daman.edman.screens.SplashScreen.SplashScreen
+import com.daman.edman.screens.OnBoarding.OnBoardingScreen
 import com.trend.thecontent.data.local.preference.SavePreferences
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -26,6 +27,10 @@ fun SetUpNavGraph (navController : NavHostController, modifier: Modifier = Modif
 
         composable<SplashScreen>{
             SplashScreen(navController = navController)
+        }
+
+        composable<OnBoardingScreen>{
+            OnBoardingScreen(navController = navController)
         }
     }
 }

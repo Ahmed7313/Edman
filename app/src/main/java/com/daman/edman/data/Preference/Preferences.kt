@@ -58,4 +58,8 @@ interface Preferences {
 
     fun getUserLocationId(): Int
 
+    fun putIntroPassed(passed: Boolean)
+
+    fun getIntroPassed(): Boolean
+
 }

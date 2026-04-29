@@ -65,7 +65,7 @@ class ConfirmCodeViewModel @Inject constructor(
                     Timber.tag(TAG).d("getIntro: error")
                     _isLoadingProgressBar.emit(false)
                     Timber.tag(TAG).i(response.message)
-                    msg.value = response.data?.msg ?: "An error occurred"
+                    msg.value = response.message ?: "An error occurred"
                     Timber.tag(TAG).i("Error message set: ${msg.value}")
 
                 }

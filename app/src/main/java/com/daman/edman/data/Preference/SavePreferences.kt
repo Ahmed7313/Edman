@@ -163,4 +163,12 @@ class SavePreferences @Inject constructor(
         PreferencesConstants.orderIDNotification.value = 0
         putToken("")
     }
+
+    override fun putIntroPassed(passed: Boolean) {
+        edit { putBoolean(PreferencesConstants.INTRO, passed) }
+    }
+
+    override fun getIntroPassed(): Boolean {
+        return preferences.getBoolean(PreferencesConstants.INTRO, false)
+    }
 }

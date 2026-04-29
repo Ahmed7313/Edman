@@ -39,7 +39,13 @@ fun SplashScreen(
 
     LaunchedEffect(key1 = true){
         delay(2000)
-        if (preferences.getSignedInState() || !preferences.getToken().isEmpty()){
+        if (!preferences.getIntroPassed()) {
+            navController.navigate(com.aramex.mypos.Presentation.NavGrapghs.OnBoardingScreen) {
+                popUpTo(com.aramex.mypos.Presentation.NavGrapghs.SplashScreen) {
+                    inclusive = true
+                }
+            }
+        } else if (preferences.getSignedInState() || !preferences.getToken().isEmpty()){
             Timber.tag("splashScreen").v(signedInState.toString())
 
             navController.navigate(ContainerScreen){

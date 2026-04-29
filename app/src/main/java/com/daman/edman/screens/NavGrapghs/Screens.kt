@@ -21,6 +21,9 @@ object HomeScreen
 object SplashScreen
 
 @Serializable
+object OnBoardingScreen
+
+@Serializable
 object RequestScreen
 
 @Serializable
